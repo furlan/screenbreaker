@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-16"?>
+<PROG NAME="ZSBDEMO_STD" VARCL="X" SUBC="1" CNAM="DEVELOPER1" CDAT="20100923" UNAM="BCUSER" UDAT="20101016" VERN="000012" RMAND="800" RLOAD="E" FIXPT="X" SDATE="20101016" STIME="180637" IDATE="20101016" ITIME="180637" UCCHECK="X">
+ <textPool>
+  <language SPRAS="E">
+   <textElement ID="R" ENTRY="Report ZSBDEMO_STD" LENGTH="18 "/>
+  </language>
+ </textPool>
+ <source>*&amp;---------------------------------------------------------------------*
+*&amp; Report  ZSBDEMO_STD
+*&amp;
+*&amp;---------------------------------------------------------------------*
+*&amp;
+*&amp;
+*&amp;---------------------------------------------------------------------*
+
+REPORT  zsbdemo_std.
+
+PARAMETERS: x_opt_1 RADIOBUTTON GROUP opt USER-COMMAND option_selected,
+            p_carrid TYPE scarr-carrid,
+            x_opt_2 RADIOBUTTON GROUP opt DEFAULT &apos;X&apos;.
+SELECT-OPTIONS: s_carrid FOR p_carrid.
+
+AT SELECTION-SCREEN OUTPUT.
+  LOOP AT SCREEN.
+    CASE screen-name.
+      WHEN &apos;P_CARRID&apos;.
+        IF x_opt_1 = &apos;X&apos;.
+          screen-input = 1.
+        ELSE.
+          screen-input = 0.
+        ENDIF.
+      WHEN &apos;S_CARRID-LOW&apos;.
+        IF x_opt_1 = &apos;X&apos;.
+          screen-input = 0.
+        ELSE.
+          screen-input = 1.
+        ENDIF.
+      WHEN &apos;S_CARRID-HIGH&apos;.
+        IF x_opt_1 = &apos;X&apos;.
+          screen-input = 0.
+        ELSE.
+          screen-input = 1.
+        ENDIF.
+      WHEN OTHERS.
+    ENDCASE.
+    MODIFY SCREEN.
+  ENDLOOP.
+
+START-OF-SELECTION.</source>
+</PROG>
